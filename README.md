@@ -16,3 +16,5 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 Aplicativo de comida, criação de cardápio digital com produto, descrição, preço e imagem, o usuário tem que se cadastrar com email e senha, e fazer o pedido, ir pro carrinho selecionar a quantidade e efetuar o pagamento via pix!
+
+está em fase de aprimoramento para futuros clientes que quiserem para o restaurante deles, mas tenho que melhorar o visual padrão
