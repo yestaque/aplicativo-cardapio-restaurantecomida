@@ -18,19 +18,18 @@ class _LoginPageState extends State<LoginPage> {
     try {
       setState(() => carregando = true);
 
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-  email: emailController.text.trim(),
-  password: senhaController.text.trim(),
-);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: senhaController.text.trim(),
+      );
 
-// 🔥 REDIRECIONA
-Navigator.pushReplacement(
-  context,
-  MaterialPageRoute(builder: (_) => HomePage()),
-);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => HomePage()),
+      );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Login realizado ✅")),
+        const SnackBar(content: Text("Login realizado com sucesso 🍔")),
       );
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -51,7 +50,7 @@ Navigator.pushReplacement(
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Cadastro realizado com sucesso ✅")),
+        const SnackBar(content: Text("Conta criada com sucesso 🎉")),
       );
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -65,39 +64,94 @@ Navigator.pushReplacement(
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: "Email"),
+      backgroundColor: const Color(0xFFFFF3E0),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Card(
+            elevation: 8,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-            TextField(
-              controller: senhaController,
-              decoration: const InputDecoration(labelText: "Senha"),
-              obscureText: true,
-            ),
-            const SizedBox(height: 24),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.fastfood,
+                    size: 80,
+                    color: Colors.deepOrange,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Bem-vindo à Lanchonete",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.deepOrange,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
 
-            if (carregando)
-              const CircularProgressIndicator()
-            else ...[
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: login,
-                  child: const Text("Entrar"),
-                ),
+                  TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      prefixIcon: const Icon(Icons.email),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  TextField(
+                    controller: senhaController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: "Senha",
+                      prefixIcon: const Icon(Icons.lock),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  if (carregando)
+                    const CircularProgressIndicator(color: Colors.deepOrange)
+                  else ...[
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48,
+                      child: ElevatedButton(
+                        onPressed: login,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepOrange,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        child: const Text(
+                          "Entrar",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextButton(
+                      onPressed: cadastrar,
+                      child: const Text(
+                        "Criar conta",
+                        style: TextStyle(color: Colors.deepOrange),
+                      ),
+                    ),
+                  ],
+                ],
               ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: cadastrar,
-                child: const Text("Criar conta"),
-              ),
-            ]
-          ],
+            ),
+          ),
         ),
       ),
     );
