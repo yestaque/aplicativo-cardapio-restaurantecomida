@@ -19,7 +19,7 @@ class DetalhePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Image.network(
+              child: Image.asset(
                 comida.imagem,
                 height: 200,
               ),

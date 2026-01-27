@@ -39,15 +39,6 @@ android {
     }
 }
 
-buildscript {
-  dependencies {
-    classpath 'com.google.gms:google-services:4.4.0'
-  }
-}
-
-
 flutter {
     source = "../.."
 }
-
-apply plugin: 'com.google.gms.google-services'
